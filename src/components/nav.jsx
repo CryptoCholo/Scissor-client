@@ -6,9 +6,9 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const navigation = [
     { name: 'Home', href: '/'},
-    { name: 'History', href: '/results'},
-    { name: 'Signup', href: 'https://pdn-v6zccyjaee2nczhtqec7kkx32adbe4pf.login.aws.eu.pangea.cloud/signup?redirect_uri=http%3A%2F%2Flocalhost%3A5173'},
-    { name: 'Login', href: 'https://pdn-v6zccyjaee2nczhtqec7kkx32adbe4pf.login.aws.eu.pangea.cloud/authorize?state=xxxxxxxxxxxxx&redirect_uri=http%3A%2F%2Flocalhost%3A5173'},
+    { name: 'History', href: '/history'},
+    { name: 'Login', href: '/login'},
+    { name: 'Signup', href: '/signup'},
   ]
   
   function classNames(...classes) {

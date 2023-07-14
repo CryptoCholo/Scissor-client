@@ -9,23 +9,36 @@ export default function InputComp() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://scissor-api-9l4p.onrender.com/", {
+      console.log(localStorage)
+      let token = localStorage.getItem("token");
+
+      if (!token) {
+        console.log("User is not authenticated");
+        window.location.href = "/login";
+        return;
+      }     
+       const response = await fetch("https://cezor.onrender.com/urls", {
         method: "POST",
+        mode: "cors",
         headers: {
           "Content-Type": "application/json",
-          'Access-Control-Allow-Origin': '*',
-          
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
-        mode: 'cors',
         body: JSON.stringify({ url }),
       });
+      if (!response.ok) {
+        let log = await response.json()
+        console.log(log)
+        console.error("Request failed:", response.statusText);
+        return;
+      }
       const data = await response.json();
       console.log(data);
       setShortLink(data.short)
+      
     } catch (error) {
       console.error("Error:", error);
     }
-    console.log(url);
   };
 
   return (
@@ -36,8 +49,7 @@ export default function InputComp() {
             Create
           </button>
       </form>
-      { shortLink && <input type="text"  value={shortLink} onChange={onChange} className="pr-20 w-full rounded-l-xl py-3 px-6 text-xl font-bold border border-gray-800"/>}
+      { shortLink && <input type="text"  value={shortLink} readOnly onChange={onChange} className="pr-20 w-full rounded-l-xl py-3 px-6 text-xl font-bold border border-gray-800"/>}
     </div>
-    
   );
 }
