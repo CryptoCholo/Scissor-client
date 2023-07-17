@@ -55,18 +55,18 @@ export default function Signup() {
                         <input type="hidden" name="remember" defaultValue="true" />
                         <div className="-space-y-px rounded-md shadow-sm">
                             <div>
-                            <label htmlFor="email-address" className="sr-only">
+                            <label htmlFor="username" className="sr-only">
                                 Username
                             </label>
                             <input
                                 id="username"
                                 name="username"
-                                type="text"
+                                type="email"
                                 value={formData.username}
                                 onChange={onChange}
                                 required
                                 className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-yellow-900 focus:outline-none focus:ring-yellow-900 sm:text-sm"
-                                placeholder="Username"
+                                placeholder="Email"
                             />
                             </div>
                             <div>

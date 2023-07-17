@@ -51,10 +51,10 @@ export default function Login() {
                           <input type="hidden" name="remember" defaultValue="true" />
                           <div className="-space-y-px rounded-md shadow-sm">
                               <div>
-                                <label htmlFor="email-address" className="sr-only">
+                                <label htmlFor="username" className="sr-only">
                                     Username
                                 </label>
-                                <input id="username" name="username" type="text" value={formData.username} onChange={onChange} required
+                                <input id="username" name="username" type="email" value={formData.username} onChange={onChange} required
                                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-green-900 focus:outline-none focus:ring-green-900 sm:text-sm"
                                     placeholder="Email address"/>
                               </div>
