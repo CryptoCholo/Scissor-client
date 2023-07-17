@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 
 function QRCodeImage({ imageUrl }) {
-    console.log(imageUrl)
+    
   return (
     <div>
       <img src={imageUrl} alt="QR Code" />

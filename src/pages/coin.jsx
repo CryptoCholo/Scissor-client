@@ -19,7 +19,6 @@ function Dashboard() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data.urls)
         setUrls(data.urls)
       })
       .catch(error => {
@@ -28,8 +27,8 @@ function Dashboard() {
   }, [])
 
   return (
-    <div className='w-screen p-5 flex flex-col items-center justify-start'>
-        <h2 className='h-6 font-bold mt-14'>YOUR URL COLLECTION</h2>
+    <div className='w-screen mt-14 p-5 flex flex-col items-center justify-start'>
+        <h2 className='h-6 font-bold' >YOUR URL COLLECTION</h2>
         <table className="w-3/4 divide-y divide-green-200 mt-8 text-sm p-5">
           <thead className="bg-green-50 w-full">
             <tr className="w-full">
@@ -62,7 +61,7 @@ function Dashboard() {
                        {item.full}
                     </td>
                     <td className="whitespace-nowrap px-4 py-4 text-green-700">
-                      {item.short}
+                      <a href={`https://cezor.onrender.com/urls/${item.short}`}>{item.short}</a>
                     </td>
                     <td className="whitespace-nowrap px-4 py-4 text-green-700">
                       <QRCodeImage imageUrl={item.qrcode} className="h-3/4 w-3/4"/>

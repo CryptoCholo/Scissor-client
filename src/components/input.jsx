@@ -14,11 +14,10 @@ export default function InputComp() {
       let token = localStorage.getItem("token");
 
       if (!token) {
-        console.log("User is not authenticated");
         window.location.href = "/login";
         return;
       }     
-       const response = await fetch("http://localhost:5000/urls", {
+       const response = await fetch("https://cezor.onrender.com/urls", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -27,16 +26,16 @@ export default function InputComp() {
         },
         body: JSON.stringify({ url }),
       });
-      if (!response.ok) {
-       await response.json()
-       
+   
+      if (response.status == 401) {
         console.error("Request failed:", response.statusText);
+
+        window.location.href = "/login";
+       
         return;
       }
       const data = await response.json();
-      console.log(typeof data.url.qrcode)
       setShortLink(data.url)
-      
     } catch (error) {
       console.error("Error:", error);
     }
@@ -51,11 +50,11 @@ export default function InputComp() {
           </button>
       </form>
       { shortLink && 
-          <table className="w-3/4 divide-y divide-green-200 mt-8 text-sm p-5">
+          <table className="w-3/4 h-9 divide-y divide-green-200 mt-8 text-sm p-5">
             <thead className="divide-y divide-stone-200 w-full">
                 <tr key={shortLink._id} className="w-full">
-                  <td className="whitespace-nowrap font-bold px-4 py-4 text-green-700">
-                    {shortLink.short}
+                  <td className="whitespace-nowrap font-bold text-lg px-4 py-4 text-green-700">
+                    <a href={`https://cezor.onrender.com/urls/${shortLink.short}`}>{shortLink.short}</a>
                   </td>
                   <td className="whitespace-nowrap px-4 py-4 text-green-700">
                     <QRCodeImage imageUrl={shortLink.qrcode} className="h-3/4 w-3/4"/>
