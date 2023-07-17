@@ -101,16 +101,10 @@ export default function Login() {
                             </a>
                             </div>
                         </div>
-            
-                        <div>
-                            <button
-                            type="submit"
-                            className="group relative flex w-full justify-center rounded-md border border-transparent text-green-100 py-2 px-4 text-sm font-bold bg-green-900 hover:text-green-900 hover:bg-green-100 focus:outline-none"
-                            >
-                            
-                            Sign in
-                            </button>
-                        </div>
+                          <button type="submit" className="group relative flex w-full justify-center rounded-md border border-transparent text-green-100 py-2 px-4 text-sm font-bold bg-green-900 hover:text-green-900 hover:bg-green-100 focus:outline-none"
+                          >
+                          Sign in
+                          </button>
                         </form>
                     </div>
                 </div>

@@ -1,21 +1,33 @@
-import { Fragment} from 'react';
+import { Fragment, useState} from 'react';
 import { Outlet, Link } from "react-router-dom";
 import { Disclosure,  Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import PropTypes from 'prop-types';
 
 
-const navigation = [
-    { name: 'Home', href: '/'},
-    { name: 'History', href: '/history'},
-    { name: 'Login', href: '/login'},
-    { name: 'Signup', href: '/signup'},
-  ]
+
   
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
   
-  export default function Nav() {
+  export default function Nav({ isAuthenticated }) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const navigation = [
+      { name: 'Home', href: '/' },
+      isAuthenticated
+        ? { name: 'History', href: '/history' } 
+        : { name: 'Login', href: '/login' },
+      isAuthenticated && { name: 'Logout', href: '/logout' },
+      !isAuthenticated && { name: 'Signup', href: '/signup' },
+    ].filter(Boolean);
+    
+
+  const handleMenuToggle = () => {
+    
+    setIsOpen(!isOpen);
+  };
     return (
         <>
           <div className="h-screen w-screen flex align-center justify-center">
@@ -60,7 +72,7 @@ const navigation = [
                       </div>
                       <div className="-mr-2 flex md:hidden">
                         {/* Mobile menu button */}
-                        <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-green-900 p-2 text-green-100 hover:bg-green-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-700">
+                        <Disclosure.Button onClick={handleMenuToggle} className="inline-flex items-center justify-center rounded-md bg-green-900 p-2 text-green-100 hover:bg-green-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-700">
                           <span className="sr-only">Open main menu</span>
                           {open ? (
                             <XMarkIcon className="block h-8 w-8 bg-green-900" aria-hidden="true" />
@@ -85,7 +97,7 @@ const navigation = [
                       <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
                         {navigation.map((item) => (
                           
-                          <Disclosure.Button key={item.name} onClick={close} className={classNames(
+                          <Disclosure.Button key={item.name} onClick={handleMenuToggle} className={classNames(
                             item.current ? 'bg-green-100 text-green-900' : 'text-green-100 hover:bg-green-500 hover:text-stone-900',
                             'block px-3 py-2 rounded-md text-base font-medium'
                           )}>
@@ -107,3 +119,8 @@ const navigation = [
         </>
       )
   }
+
+  Nav.propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
+};
+  

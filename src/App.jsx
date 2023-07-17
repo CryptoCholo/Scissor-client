@@ -9,10 +9,13 @@ import Dashboard from './pages/coin.jsx';
 
 
 function App() {
+  let token = localStorage.getItem('token')
+  const isAuthenticated = token ?  true : false; 
+
   return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Nav/>}>
+          <Route path="/" element={<Nav isAuthenticated={isAuthenticated}/>}>
             <Route index element={<Home/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<SignUp/>}/>
